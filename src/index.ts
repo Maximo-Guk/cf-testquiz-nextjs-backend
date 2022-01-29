@@ -52,9 +52,7 @@ router.post('/api/quiz/:uuid', async (request: Request) => {
         user.removeFromCache(request.url);
       }
 
-      return new Response(
-        JSON.stringify({ answer: isAnswerCorrect, age: user.getAge() }),
-      );
+      return new Response(JSON.stringify({ answer: isAnswerCorrect }));
     }
   } catch (error) {
     if (error instanceof ValidationError) {
