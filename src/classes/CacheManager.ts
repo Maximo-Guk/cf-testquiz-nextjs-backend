@@ -10,16 +10,23 @@ export default class CacheManager {
     return await cache.put(cacheUrl, response);
   }
 
-  public static async update(requestUrl: string, uuid: string, cacheObject: string) {
-    await cache.delete(requestUrl);
-    return await this.put(requestUrl, uuid, cacheObject);
+  public static async update(
+    requestUrlWithUuid: string,
+    cacheObject: string,
+    age: number,
+  ) {
+    const updatedResponse = new Response(cacheObject);
+    updatedResponse.headers.append('Cache-Control', 's-maxage=1800');
+    updatedResponse.headers.set('age', age.toString());
+
+    return await cache.put(requestUrlWithUuid, updatedResponse);
   }
 
-  public static async match(requestUrl: string) {
-    return await cache.match(requestUrl);
+  public static async match(requestUrlWithUuid: string) {
+    return await cache.match(requestUrlWithUuid);
   }
 
-  public static async delete(requestUrl: string) {
-    return await cache.delete(requestUrl);
+  public static async delete(requestUrlWithUuid: string) {
+    return await cache.delete(requestUrlWithUuid);
   }
 }

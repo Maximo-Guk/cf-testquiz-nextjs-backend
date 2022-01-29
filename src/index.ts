@@ -5,6 +5,8 @@ import ValidationError from './classes/ValidationError';
 import uuidValidateV1 from './components/uuidValidateV1';
 import validateJson from './components/validateJson';
 
+// const devUser = new User('baf4d3e0-8140-11ec-be62-77db812d0b2c', 0, 0);
+
 // Create a new router
 const router = Router();
 
@@ -52,7 +54,9 @@ router.post('/api/quiz/:uuid', async (request: Request) => {
         user.removeFromCache(request.url);
       }
 
-      return new Response(JSON.stringify({ answer: isAnswerCorrect }));
+      return new Response(
+        JSON.stringify({ answer: isAnswerCorrect, age: user.getAge() }),
+      );
     }
   } catch (error) {
     if (error instanceof ValidationError) {

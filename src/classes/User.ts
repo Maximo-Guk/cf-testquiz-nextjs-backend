@@ -4,14 +4,16 @@ import CacheManager from './CacheManager';
 export default class User {
   private uuid: string;
   private roundNumber: number;
+  private age: number;
 
-  constructor(uuid: string, roundNumber: number) {
+  constructor(uuid: string, roundNumber: number, age: number) {
     this.uuid = uuid;
     this.roundNumber = roundNumber;
+    this.age = age;
   }
 
   public static newUser() {
-    return new User(uuidv1(), 0);
+    return new User(uuidv1(), 0, 0);
   }
 
   public getUuid() {
@@ -22,6 +24,10 @@ export default class User {
     return this.roundNumber;
   }
 
+  public getAge() {
+    return this.age;
+  }
+
   public incrementRoundNumber() {
     this.roundNumber++;
   }
@@ -30,18 +36,24 @@ export default class User {
     return await CacheManager.put(requestUrl, this.getUuid(), this.toString());
   }
 
-  public async updateCache(requestUrl: string) {
-    return await CacheManager.update(requestUrl, this.getUuid(), this.toString());
+  public async updateCache(requestUrlWithUuid: string) {
+    return await CacheManager.update(requestUrlWithUuid, this.toString(), this.getAge());
   }
 
-  public static async getUserFromCache(requestUrl: string) {
-    const response = await CacheManager.match(requestUrl);
+  public static async getUserFromCache(requestUrlWithUuid: string) {
+    const response = await CacheManager.match(requestUrlWithUuid);
     if (response) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const responseParsedJson: any = await response.json();
-      return new User(responseParsedJson.uuid, responseParsedJson.roundNumber);
+      const age = response.headers.get('age');
+      if (age) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const responseParsedJson: any = await response.json();
+        return new User(
+          responseParsedJson.uuid,
+          responseParsedJson.roundNumber,
+          Number.parseInt(age),
+        );
+      }
     }
-    return response;
   }
 
   public async removeFromCache(requestUrl: string) {
