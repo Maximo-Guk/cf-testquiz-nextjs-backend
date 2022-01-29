@@ -5,8 +5,6 @@ import ValidationError from './classes/ValidationError';
 import uuidValidateV1 from './components/uuidValidateV1';
 import validateJson from './components/validateJson';
 
-// const devUser = new User('baf4d3e0-8140-11ec-be62-77db812d0b2c', 0, 0);
-
 // Create a new router
 const router = Router();
 

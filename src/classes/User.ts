@@ -43,16 +43,26 @@ export default class User {
   public static async getUserFromCache(requestUrlWithUuid: string) {
     const response = await CacheManager.match(requestUrlWithUuid);
     if (response) {
-      const age = response.headers.get('age');
-      if (age) {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const responseParsedJson: any = await response.json();
-        return new User(
-          responseParsedJson.uuid,
-          responseParsedJson.roundNumber,
-          Number.parseInt(age),
-        );
+      const maxAge = response.headers.get('Cache-Control');
+      let age = response.headers.get('age');
+
+      if (!age) {
+        age = '0';
+      } else if (maxAge && maxAge !== 's-maxage=1800') {
+        age = (
+          1800 -
+          Number.parseInt(maxAge.split('s-maxage=')[1]) +
+          Number.parseInt(age)
+        ).toString();
       }
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const responseParsedJson: any = await response.json();
+      return new User(
+        responseParsedJson.uuid,
+        responseParsedJson.roundNumber,
+        Number.parseInt(age),
+      );
     }
   }
 

@@ -16,8 +16,7 @@ export default class CacheManager {
     age: number,
   ) {
     const updatedResponse = new Response(cacheObject);
-    updatedResponse.headers.append('Cache-Control', 's-maxage=1800');
-    updatedResponse.headers.set('age', age.toString());
+    updatedResponse.headers.append('Cache-Control', `s-maxage=${1800 - age}`);
 
     return await cache.put(requestUrlWithUuid, updatedResponse);
   }
