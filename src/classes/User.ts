@@ -6,7 +6,7 @@ export default class User {
   private roundNumber: number;
   private age: number;
 
-  constructor(uuid: string, roundNumber: number, age: number) {
+  private constructor(uuid: string, roundNumber: number, age: number) {
     this.uuid = uuid;
     this.roundNumber = roundNumber;
     this.age = age;
