@@ -17,7 +17,7 @@ router.get('/api/quiz', async (request: Request) => {
   const user = User.newUser();
   await user.addToCache(request.url);
 
-  return new Response(user.toString());
+  return new Response(JSON.stringify({ uuid: user.getUuid() }));
 });
 
 router.all('/api/quiz/:uuid', (request: Request) => {
