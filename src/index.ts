@@ -14,20 +14,20 @@ router.options('*', () => {
   return cors(new Response());
 });
 
-router.get('/api/quiz', async (request: Request) => {
+router.get('/api/quiz/v2', async (request: Request) => {
   const user = User.newUser();
   await user.addToCache(request.url);
 
   return cors(new Response(JSON.stringify({ uuid: user.getUuid() })));
 });
 
-router.all('/api/quiz/:uuid', (request: Request) => {
-  if (!uuidValidateV1(request.url.split('/')[5])) {
+router.all('/api/quiz/v2/:uuid', (request: Request) => {
+  if (!uuidValidateV1(request.url.split('/')[6])) {
     return cors(new Response('Invalid uuid.', { status: 400 }));
   }
 });
 
-router.get('/api/quiz/:uuid', async (request: Request) => {
+router.get('/api/quiz/v2/:uuid', async (request: Request) => {
   const user = await User.getUserFromCache(request.url);
 
   if (user) {
@@ -35,7 +35,7 @@ router.get('/api/quiz/:uuid', async (request: Request) => {
   }
 });
 
-router.post('/api/quiz/:uuid', async (request: Request) => {
+router.post('/api/quiz/v2/:uuid', async (request: Request) => {
   try {
     const requestJson = await validateJson(request);
     if (!requestJson.answer) {
