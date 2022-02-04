@@ -2,9 +2,9 @@ import { v1 as uuidv1 } from 'uuid';
 import CacheManager from './CacheManager';
 
 export default class User {
-  private uuid: string;
+  private readonly uuid: string;
   private roundNumber: number;
-  private age: number;
+  private readonly age: number;
 
   private constructor(uuid: string, roundNumber: number, age: number) {
     this.uuid = uuid;
