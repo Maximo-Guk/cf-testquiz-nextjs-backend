@@ -49,7 +49,7 @@ const questions = [
       'William Philip Arthur Louis Windsor',
       'John',
     ],
-    correctAnswer: "Anthony's Ultimate Quiz",
+    correctAnswer: 'William Arthur Philip Louis Windsor',
   },
   {
     question: 'Are you sure you want to Continue?',
