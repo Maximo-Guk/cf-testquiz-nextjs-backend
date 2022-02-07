@@ -19,7 +19,7 @@ export default class Quiz {
       user.incrementRoundNumber();
       return true;
     } else if (user.getRoundNumber() === 9) {
-      user.setRoundNumber(3);
+      user.setRoundNumber(2);
       return true;
     }
 
