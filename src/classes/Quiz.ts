@@ -18,9 +18,7 @@ export default class Quiz {
     if (questions[user.getRoundNumber()].correctAnswer === answer) {
       user.incrementRoundNumber();
       return true;
-    }
-
-    if (user.getRoundNumber() === 9) {
+    } else if (user.getRoundNumber() === 9) {
       user.setRoundNumber(3);
       return true;
     }
