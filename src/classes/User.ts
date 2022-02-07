@@ -28,6 +28,10 @@ export default class User {
     return this.age;
   }
 
+  public setRoundNumber(roundNumber: number) {
+    this.roundNumber = roundNumber;
+  }
+
   public incrementRoundNumber() {
     this.roundNumber++;
   }

@@ -18,10 +18,16 @@ const questions = [
     correctAnswer: 'Score 10 points to proceed to the next level',
   },
   {
+    question: 'Find The Cow',
+    type: 'findCow',
+    answers: ['Find the cow to proceed to the next level'],
+    correctAnswer: 'Find the cow to proceed to the next level',
+  },
+  {
     question: 'What page number is this?',
     type: 'button',
-    answers: ['8', '4', '7', '5'],
-    correctAnswer: '7',
+    answers: ['8', '4', '6', '5'],
+    correctAnswer: '6',
   },
   {
     question: 'What is 0.5 ÷ 59',
@@ -42,6 +48,12 @@ const questions = [
     correctAnswer: "Anthony's Ultimate Quiz",
   },
   {
+    question: 'Find i',
+    type: 'findI',
+    answers: ['Find the letter i to proceed to the next level'],
+    correctAnswer: 'Find the letter i to proceed to the next level',
+  },
+  {
     question: "What is Prince William's full name?",
     type: 'button',
     answers: [
@@ -50,6 +62,12 @@ const questions = [
       'John',
     ],
     correctAnswer: 'William Arthur Philip Louis Windsor',
+  },
+  {
+    question: 'Do you want to play snake?',
+    type: 'button',
+    answers: ['Yes', 'No'],
+    correctAnswer: 'No',
   },
   {
     question: 'Are you sure you want to Continue?',
@@ -62,6 +80,12 @@ const questions = [
     type: 'button',
     answers: ['No', 'No', 'Yes'],
     correctAnswer: 'Yes',
+  },
+  {
+    question: 'Evil Cows of Doom',
+    type: 'evilCows',
+    answers: ['Continue?'],
+    correctAnswer: 'Continue?',
   },
 ];
 
