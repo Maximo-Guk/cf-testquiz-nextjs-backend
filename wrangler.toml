@@ -3,7 +3,7 @@ type = "javascript"
 zone_id = "f1974a146d724072fffc180fa3c097a1"
 account_id = "9d5a66033268ccdf77b19d50cc3d4e5d"
 workers_dev = true
-compatibility_date = "2022-01-28"
+compatibility_date = "2022-02-07"
 
 [build]
 command = "npm install && npm run build"
